@@ -1,4 +1,4 @@
-const API_KEY = 'VOTRE_CLE_API';           // ← à remplacer par ta vraie clé
+const API_KEY = 'AIzaSyDfGq1Cms9f8dXs8vY6A_Blabla';           // ← à remplacer par ta vraie clé
 const CHANNEL_ID = 'UCt6oNQOaBrZgBdQ4m1x8XbA';
 const MAX  = 50;
 let pageToken = '';
@@ -27,4 +27,5 @@ async function load() {
     box.appendChild(btn);
   }
 }
+
 load().catch(e => box.innerHTML = 'Erreur : ' + e);
