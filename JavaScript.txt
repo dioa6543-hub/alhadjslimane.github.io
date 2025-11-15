@@ -1,5 +1,6 @@
-const CHANNEL_ID = 'UCt6oNQOaBrZgBdQ4m1x8XbA';';           // ← à remplacer par ta vraie clé
-const CHANNEL_ID = 'UCt6oNQOaBrZgBdQ4m1x8XbA';
+
+const CHANNEL_ID = 'UCt6oNQOaBrZgBdQ4m1x8XbA';';';           // ← à remplacer par ta vraie clé
+
 const MAX  = 50;
 let pageToken = '';
 const box = document.getElementById('video-list');
@@ -29,4 +30,5 @@ async function load() {
 }
 
 load().catch(e => box.innerHTML = 'Erreur : ' + e);
+
 
