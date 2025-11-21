@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyBH1hkd84LCyxVn5wzTHC_aShzVHWCbIyw';
+const API_KEY = 'AIzaSyA8hZYwnD84Hi3ccB2TGbk9Yq3ooE7TrBQ';
 const CHANNEL_ID = 'UC_x5XG1OV2P6uZZ5FSM9Ttw';
 const MAX = 50;
 let pageToken = '';
@@ -36,4 +36,5 @@ async function load() {
 }
 
 load().catch(e => box.innerHTML = 'Erreur : ' + e);
+
 
