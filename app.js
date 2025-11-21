@@ -29,6 +29,7 @@ async function load() {
   if (d.nextPageToken) {
     pageToken = d.nextPageToken;
     const btn = document.createElement('button');
+    btn.className = 'load-more';
     btn.textContent = 'Charger plus';
     btn.onclick = () => { btn.remove(); load(); };
     box.appendChild(btn);
@@ -36,8 +37,3 @@ async function load() {
 }
 
 load().catch(e => box.innerHTML = 'Erreur : ' + e);
-
-
-
-
-
