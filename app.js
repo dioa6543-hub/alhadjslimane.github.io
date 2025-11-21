@@ -1,11 +1,21 @@
-const url = `https://www.googleapis.com/youtube/v3/search?
-key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&maxResults=${MAX}&pageToken=${pageToken}&type=video`;
+const API_KEY = 'AIzaSyBH1hkd84LCyxVn5wzTHC_aShzVHWCbIyw';
+const CHANNEL_ID = 'UC_x5XG1OV2P6uZZ5FSM9Ttw';
+const MAX = 50;
+let pageToken = '';
+const box = document.getElementById('video-list');
+
 async function load() {
-  const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX}&pageToken=${pageToken}`;
-  const r   = await fetch(url);
-  const d   = await r.json();
+  const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&maxResults=${MAX}&pageToken=${pageToken}&type=video`;
+  const r = await fetch(url);
+  const d = await r.json();
+
+  if (!d.items) {
+    box.innerHTML = 'Erreur API : ' + (d.error?.message || 'Vérifie la clé / quota / restrictions');
+    console.error(d);
+    return;
+  }
+
   d.items.forEach(v => {
-    if (v.id.kind !== 'youtube#video') return;
     box.insertAdjacentHTML('beforeend', `
       <div class="card">
         <a href="https://www.youtube.com/watch?v=${v.id.videoId}" target="_blank">
@@ -15,6 +25,7 @@ async function load() {
       </div>
     `);
   });
+
   if (d.nextPageToken) {
     pageToken = d.nextPageToken;
     const btn = document.createElement('button');
@@ -25,6 +36,4 @@ async function load() {
 }
 
 load().catch(e => box.innerHTML = 'Erreur : ' + e);
-
-
 
