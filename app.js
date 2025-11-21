@@ -1,8 +1,4 @@
-const API_KEY = 'AIzaSyAWRAkQAgjbmrQ18CIx598vQnMLUwlo554';           // ← à remplacer par ta vraie clé
-const CHANNEL_ID = 'UCt6oNQOaBrZgBdQ4m1x8XbA';
-const MAX  = 50;
-let pageToken = '';
-const box = document.getElementById('video-list');
+const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&maxResults=${MAX}&pageToken=${pageToken}&type=video`;
 
 async function load() {
   const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX}&pageToken=${pageToken}`;
@@ -29,4 +25,5 @@ async function load() {
 }
 
 load().catch(e => box.innerHTML = 'Erreur : ' + e);
+
 
