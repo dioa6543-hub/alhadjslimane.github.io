@@ -1,5 +1,5 @@
-const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&maxResults=${MAX}&pageToken=${pageToken}&type=video`;
-
+const url = `https://www.googleapis.com/youtube/v3/search?
+key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&maxResults=${MAX}&pageToken=${pageToken}&type=video`;
 async function load() {
   const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX}&pageToken=${pageToken}`;
   const r   = await fetch(url);
@@ -25,5 +25,6 @@ async function load() {
 }
 
 load().catch(e => box.innerHTML = 'Erreur : ' + e);
+
 
 
