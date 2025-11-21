@@ -1,5 +1,5 @@
 const API_KEY = 'AIzaSyBzZuifPo_zzW7mE4ssKf0tnP-P64jwBFE';
-const CHANNEL_ID = 'UC_x5XG1OV2P6uZZ5FSM9Ttw';
+const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg';
 const MAX = 50;
 let pageToken = '';
 const box = document.getElementById('video-list');
@@ -36,6 +36,7 @@ async function load() {
 }
 
 load().catch(e => box.innerHTML = 'Erreur : ' + e);
+
 
 
 
