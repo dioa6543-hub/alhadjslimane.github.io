@@ -25,6 +25,7 @@ async function load() {
           <img src="${v.snippet.thumbnails.medium.url}" alt="">
           <h3>${v.snippet.title}</h3>
         </a>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
       </div>
     `);
   });
