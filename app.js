@@ -1,5 +1,5 @@
 const API_KEY = 'AIzaSyBzZuifPo_zzW7mE4ssKf0tnP-P64jwBFE'; // Remplace par ta clé API
-const CHANNEL_ID = 'UC_x5XG1OV2P6uZZ5FSM9Ttw'; // ID de la chaîne YouTube
+const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg'; // ID de la chaîne YouTube
 const MAX = 50;
 let pageToken = '';
 const box = document.getElementById('video-list');
@@ -45,3 +45,4 @@ function openVideo(videoId, title) {
 }
 
 load().catch(e => box.innerHTML = 'Erreur : ' + e);
+
