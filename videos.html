@@ -1,1 +1,61 @@
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Lecteur perso – Alhadj Slimane</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #eee;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .player-box {
+      max-width: 800px;
+      margin: auto;
+      background: #1c1c1e;
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.4);
+    }
+    video {
+      width: 100%;
+      border-radius: 12px;
+    }
+    .info {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+    }
+    a.back {
+      display: inline-block;
+      margin-top: 2rem;
+      color: #0a84ff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lecteur vidéo personnel</h1>
+
+  <div class="player-box">
+    <video id="myVideo" controls preload="metadata">
+      <source src="video.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la lecture vidéo.
+    </video>
+    <p class="info">Vidéo locale hébergée sur ton dépôt GitHub.</p>
+  </div>
+
+  <a class="back" href="index.html">← Retour à l'accueil</a>
+
+  <script>
+    const video = document.getElementById('myVideo');
+    video.load();
+  </script>
+</body>
+</html>
