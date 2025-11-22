@@ -3,7 +3,6 @@ const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg';
 const MAX = 50;
 let pageToken = '';
 const box = document.getElementById('video-list');
-const loader = document.querySelector('.loader');
 
 async function load() {
   const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&maxResults=${MAX}&pageToken=${pageToken}&type=video`;
@@ -13,7 +12,6 @@ async function load() {
   if (!d.items) {
     box.innerHTML = 'Erreur API : ' + (d.error?.message || 'Vérifie la clé / quota / restrictions');
     console.error(d);
-    loader.style.display = 'none';
     return;
   }
 
@@ -29,8 +27,8 @@ async function load() {
           <button onclick="copyVideoLink('${videoId}')">Copier</button>
           <button onclick="shareVideo('${videoId}')">Partager</button>
           <button onclick="downloadVideo('${videoId}')">Télécharger</button>
-          <button onclick="alert('Enregistrer la vidéo ${videoId}')">Enregistrer</button>
-          <button onclick="alert('Effacer la vidéo ${videoId}')">Effacer</button>
+          <button onclick="saveVideo('${videoId}')">Enregistrer</button>
+          <button onclick="deleteVideo('${videoId}')">Effacer</button>
         </div>
       </div>
     `);
@@ -44,8 +42,6 @@ async function load() {
     btn.onclick = () => { btn.remove(); load(); };
     box.appendChild(btn);
   }
-
-  loader.style.display = 'none';
 }
 
 function copyVideoLink(videoId) {
@@ -83,16 +79,18 @@ function downloadVideo(videoId) {
   a.click();
 }
 
-function showOptions() {
-  const options = document.getElementById('options');
-  if (options.style.display === 'none') {
-    options.style.display = 'block';
-  } else {
-    options.style.display = 'none';
-  }
+function saveVideo(videoId) {
+  const link = `https://www.youtube.com/watch?v=${videoId}`;
+  // Ici, tu devrais implémenter une fonction pour enregistrer la vidéo
+  alert('Fonctionnalité enregistrer la vidéo non implémentée.');
+}
+
+function deleteVideo(videoId) {
+  const link = `https://www.youtube.com/watch?v=${videoId}`;
+  // Ici, tu devrais implémenter une fonction pour effacer la vidéo
+  alert('Fonctionnalité effacer la vidéo non implémentée.');
 }
 
 load().catch(e => {
   box.innerHTML = 'Erreur : ' + e;
-  loader.style.display = 'none';
 });
