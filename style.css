@@ -4,7 +4,7 @@
   --text: #1d1d1f;
   --accent: #007aff;
   --radius: 16px;
-  --shadow: 0 4px 20px rgba(0,0,0.08);
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
   --transition: .3s ease;
 }
 
