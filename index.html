@@ -1,40 +1,24 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-15">
-  <title>Toutes les vidéos de lhadj slimane</title>
+  <meta charset="UTF-8">
+  <title>Alhadj Slimane – Vidéos</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Toutes les vidéos de lhadj slimane</h1>
+  <header>
+    <img src="images1.png" alt="Logo" width="50" height="50">
+    <h1>Toutes les vidéos de lhadj slimane</h1>
+  </header>
+
+  <nav>
+    <a href="videos.html">📺 Lecteur perso</a>
+  </nav>
+
   <div id="video-list">
-    <!-- Ici, tu insères ton le lecteur vidéo -->
- <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Vidéo sur mon site</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pirsonel/videojs@4.2.4/dist/pirson.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@pirson/videojs@4.2.4/dist/pirson.min.js"></script>
-</head>
-<body>
-    <h1>Vidéo sur mon site</h1>
-    <div id="video-container"></div>
-    <script>
-        var videoContainer = document.getElementById('video-container');
-        var video = new Pirson.Player(videoContainer, {
-            autoplay: false,
-            displayDuration: true,
-            volume: true,
-            playbackSpeed: true,
-            loop: true,
-            poster: 'https://cdn.jsdelivr.net/npm/@pirson/videojs@4.2.4/samples/vid/BigBuckBunny.jpg'
-        });
-    </script>
-</body>
-</html> 
+    <div class="loader"></div>
   </div>
+
   <script src="app.js"></script>
 </body>
 </html>
-
