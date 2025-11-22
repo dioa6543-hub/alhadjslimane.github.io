@@ -48,14 +48,21 @@
   <a class="back" href="index.html">← Retour</a>
 
   <script>
+    // Récupère les paramètres dans l'URL
     const params = new URLSearchParams(window.location.search);
     const file = params.get('file');
     const title = params.get('title') || 'Vidéo';
 
     document.getElementById('videoTitle').textContent = title;
+
     const video = document.getElementById('myVideo');
-    video.src = file;
-    video.load();
+    if (file) {
+      video.src = file;
+      video.load();
+      console.log('📹 Vidéo chargée :', file);
+    } else {
+      console.error('❌ Aucun fichier vidéo dans l’URL');
+    }
   </script>
 </body>
 </html>
