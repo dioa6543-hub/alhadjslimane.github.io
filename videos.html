@@ -27,10 +27,6 @@
       width: 100%;
       border-radius: 12px;
     }
-    .info {
-      margin-top: 1rem;
-      font-size: 1.1rem;
-    }
     a.back {
       display: inline-block;
       margin-top: 2rem;
@@ -47,19 +43,18 @@
       <source src="" type="video/mp4">
       Votre navigateur ne supporte pas la lecture vidéo.
     </video>
-    <p class="info">Vidéo locale hébergée sur ton dépôt GitHub.</p>
   </div>
 
   <a class="back" href="index.html">← Retour</a>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const file = params.get('file');
+    const videoId = params.get('id');
     const title = params.get('title') || 'Vidéo';
 
     document.getElementById('videoTitle').textContent = title;
     const video = document.getElementById('myVideo');
-    video.src = file;
+    video.src = `https://www.youtube.com/embed/${videoId}`;
     video.load();
   </script>
 </body>
