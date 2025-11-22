@@ -9,8 +9,32 @@
   <h1>Toutes les vidéos de lhadj slimane</h1>
   <div id="video-list">
     <!-- Ici, tu insères ton le lecteur vidéo -->
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+ <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Vidéo sur mon site</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pirsonel/videojs@4.2.4/dist/pirson.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@pirson/videojs@4.2.4/dist/pirson.min.js"></script>
+</head>
+<body>
+    <h1>Vidéo sur mon site</h1>
+    <div id="video-container"></div>
+    <script>
+        var videoContainer = document.getElementById('video-container');
+        var video = new Pirson.Player(videoContainer, {
+            autoplay: false,
+            displayDuration: true,
+            volume: true,
+            playbackSpeed: true,
+            loop: true,
+            poster: 'https://cdn.jsdelivr.net/npm/@pirson/videojs@4.2.4/samples/vid/BigBuckBunny.jpg'
+        });
+    </script>
+</body>
+</html> 
   </div>
   <script src="app.js"></script>
 </body>
 </html>
+
