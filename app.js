@@ -18,14 +18,12 @@ async function load() {
   }
 
   d.items.forEach(v => {
-    const videoId = v.id.videoId;
     box.insertAdjacentHTML('beforeend', `
       <div class="card">
-        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
+        <a href="https://www.youtube.com/watch?v=${v.id.videoId}" target="_blank">
           <img src="${v.snippet.thumbnails.medium.url}" alt="">
           <h3>${v.snippet.title}</h3>
         </a>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
       </div>
     `);
   });
@@ -38,6 +36,8 @@ async function load() {
     btn.onclick = () => { btn.remove(); load(); };
     box.appendChild(btn);
   }
+
+  loader.style.display = 'none';
 }
 
 load().catch(e => {
