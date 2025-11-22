@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Lecteur perso – Alhadj Slimane</title>
+  <title>Lecteur - Alhadj Slimane</title>
   <style>
     body {
       margin: 0;
@@ -41,20 +40,26 @@
   </style>
 </head>
 <body>
-  <h1>Lecteur vidéo personnel</h1>
+  <h1 id="videoTitle">Chargement…</h1>
 
   <div class="player-box">
     <video id="myVideo" controls preload="metadata">
-      <source src="video.mp4" type="video/mp4">
+      <source src="" type="video/mp4">
       Votre navigateur ne supporte pas la lecture vidéo.
     </video>
     <p class="info">Vidéo locale hébergée sur ton dépôt GitHub.</p>
   </div>
 
-  <a class="back" href="index.html">← Retour à l'accueil</a>
+  <a class="back" href="index.html">← Retour</a>
 
   <script>
+    const params = new URLSearchParams(window.location.search);
+    const file = params.get('file');
+    const title = params.get('title') || 'Vidéo';
+
+    document.getElementById('videoTitle').textContent = title;
     const video = document.getElementById('myVideo');
+    video.src = file;
     video.load();
   </script>
 </body>
