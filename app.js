@@ -18,12 +18,20 @@ async function load() {
   }
 
   d.items.forEach(v => {
+    const videoId = v.id.videoId;
     box.insertAdjacentHTML('beforeend', `
       <div class="card">
-        <a href="https://www.youtube.com/watch?v=${v.id.videoId}" target="_blank">
+        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
           <img src="${v.snippet.thumbnails.medium.url}" alt="">
           <h3>${v.snippet.title}</h3>
         </a>
+        <div class="video-options">
+          <button onclick="copyVideoLink('${videoId}')">Copier</button>
+          <button onclick="shareVideo('${videoId}')">Partager</button>
+          <button onclick="downloadVideo('${videoId}')">Télécharger</button>
+          <button onclick="alert('Enregistrer la vidéo ${videoId}')">Enregistrer</button>
+          <button onclick="alert('Effacer la vidéo ${videoId}')">Effacer</button>
+        </div>
       </div>
     `);
   });
@@ -40,30 +48,38 @@ async function load() {
   loader.style.display = 'none';
 }
 
-// Temps maximal de chargement
-setTimeout(() => {
-  if (loader.style.display !== 'none') {
-    box.innerHTML = 'Le chargement a pris trop de temps. Veuillez réessayer.';
-    loader.style.display = 'none';
-  }
-}, 10000); // 10 secondes
-
-function copyText() {
-  const text = document.getElementById('video-list').innerText;
-  navigator.clipboard.writeText(text).then(() => {
-    alert('Texte copié dans le presse-papier');
+function copyVideoLink(videoId) {
+  const link = `https://www.youtube.com/watch?v=${videoId}`;
+  navigator.clipboard.writeText(link).then(() => {
+    alert('Lien copié dans le presse-papier');
   }).catch(err => {
     console.error('Impossible de copier :', err);
   });
 }
 
-function downloadText() {
-  const text = document.getElementById('video-list').innerText;
-  const blob = new Blob([text], { type: 'text/plain' });
+function shareVideo(videoId) {
+  const link = `https://www.youtube.com/watch?v=${videoId}`;
+  if (navigator.share) {
+    navigator.share({
+      title: 'Partager la vidéo',
+      url: link
+    }).then(() => {
+      console.log('Partagé avec succès');
+    }).catch(err => {
+      console.error('Erreur lors du partage :', err);
+    });
+  } else {
+    alert('Votre navigateur ne supporte pas la fonctionnalité de partage. Copiez ce lien : ' + link);
+  }
+}
+
+function downloadVideo(videoId) {
+  const link = `https://www.youtube.com/watch?v=${videoId}`;
+  const blob = new Blob([link], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'videos.txt';
+  a.download = `video_${videoId}.txt`;
   a.click();
 }
 
