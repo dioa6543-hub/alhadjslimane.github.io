@@ -25,14 +25,6 @@ async function load() {
           <img src="${v.snippet.thumbnails.medium.url}" alt="">
           <h3>${v.snippet.title}</h3>
         </a>
-        <div class="video-options">
-          <button onclick="copyVideoLink('${videoId}')">Copier</button>
-          <button onclick="shareVideo('${videoId}')">Partager</button>
-          <button onclick="downloadVideo('${videoId}')">Télécharger</button>
-          <button onclick="saveVideo('${videoId}')">Enregistrer</button>
-          <button onclick="deleteVideo('${videoId}')">Effacer</button>
-        </div>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
       </div>
     `);
   });
@@ -44,55 +36,7 @@ async function load() {
     btn.textContent = 'Charger plus';
     btn.onclick = () => { btn.remove(); load(); };
     box.appendChild(btn);
-  btn.style.display = 'block';
   }
-}
-
-function copyVideoLink(videoId) {
-  const link = `https://www.youtube.com/watch?v=${videoId}`;
-  navigator.clipboard.writeText(link).then(() => {
-    alert('Lien copié dans le presse-papier');
-  }).catch(err => {
-    console.error('Impossible de copier :', err);
-  });
-}
-
-function shareVideo(videoId) {
-  const link = `https://www.youtube.com/watch?v=${videoId}`;
-  if (navigator.share) {
-    navigator.share({
-      title: 'Partager la vidéo',
-      url: link
-    }).then(() => {
-      console.log('Partagé avec succès');
-    }).catch(err => {
-      console.error('Erreur lors du partage :', err);
-    });
-  } else {
-    alert('Votre navigateur ne supporte pas la fonctionnalité de partage. Copiez ce lien : ' + link);
-  }
-}
-
-function downloadVideo(videoId) {
-  const link = `https://www.youtube.com/watch?v=${videoId}`;
-  const blob = new Blob([link], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `video_${videoId}.txt`;
-  a.click();
-}
-
-function saveVideo(videoId) {
-  const link = `https://www.youtube.com/watch?v=${videoId}`;
-  // Ici, tu devrais implémenter une fonction pour enregistrer la vidéo
-  alert('Fonctionnalité enregistrer la vidéo non implémentée.');
-}
-
-function deleteVideo(videoId) {
-  const link = `https://www.youtube.com/watch?v=${videoId}`;
-  // Ici, tu devrais implémenter une fonction pour effacer la vidéo
-  alert('Fonctionnalité effacer la vidéo non implémentée.');
 }
 
 load().catch(e => {
