@@ -7,14 +7,22 @@
 </head>
 <body>
   <h1>
-   <img src="images1.png" alt="Logo" width="50" height="50">
- 
+    <img src="images1.png" alt="Logo" width="50" height="50">
     Toutes les vidéos d'AVIDDAVIDE7119
   </h1>
+  <div id="menu">
+    <button onclick="copyText()">Copier</button>
+    <button onclick="downloadText()">Télécharger</button>
+    <button onclick="showOptions()">Plus d'options</button>
+  </div>
   <div id="video-list">
     <div class="loader"></div>
+  </div>
+  <div id="options" style="display:none;">
+    <h2>Plus d'options</h2>
+    <button onclick="alert('Option 1')">Option 1</button>
+    <button onclick="alert('Option 2')">Option 2</button>
   </div>
   <script src="app.js"></script>
 </body>
 </html>
-
