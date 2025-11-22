@@ -3,6 +3,7 @@ const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg';
 const MAX = 50;
 let pageToken = '';
 const box = document.getElementById('video-list');
+const loader = document.querySelector('.loader');
 
 async function load() {
   const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&maxResults=${MAX}&pageToken=${pageToken}&type=video`;
@@ -12,6 +13,7 @@ async function load() {
   if (!d.items) {
     box.innerHTML = 'Erreur API : ' + (d.error?.message || 'Vérifie la clé / quota / restrictions');
     console.error(d);
+    loader.style.display = 'none';
     return;
   }
 
@@ -30,6 +32,7 @@ async function load() {
           <button onclick="saveVideo('${videoId}')">Enregistrer</button>
           <button onclick="deleteVideo('${videoId}')">Effacer</button>
         </div>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
       </div>
     `);
   });
@@ -41,6 +44,7 @@ async function load() {
     btn.textContent = 'Charger plus';
     btn.onclick = () => { btn.remove(); load(); };
     box.appendChild(btn);
+  btn.style.display = 'block';
   }
 }
 
@@ -93,4 +97,5 @@ function deleteVideo(videoId) {
 
 load().catch(e => {
   box.innerHTML = 'Erreur : ' + e;
+  loader.style.display = 'none';
 });
