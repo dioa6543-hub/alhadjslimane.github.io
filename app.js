@@ -3,7 +3,7 @@ const CHANNEL_ID = 'UC_x5XG1OV2P6uZZ5FSM9Ttw'; // ID de la chaîne YouTube
 const MAX = 50;
 let pageToken = '';
 const box = document.getElementById('video-list');
-const loader = document.querySelector('.loader'); // Définis loader ici
+const loader = document.querySelector('.loader'); // Assure-toi que loader est défini ici
 
 async function load() {
   const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX}&pageToken=${pageToken}`;
@@ -13,7 +13,7 @@ async function load() {
   if (!d.items) {
     box.innerHTML = 'Erreur API : ' + (d.error?.message || 'Vérifie la clé / quota / restrictions');
     console.error(d);
-    loader.style.display = 'none'; // Utilise loader ici
+    loader.style.display = 'none';
     return;
   }
 
@@ -21,10 +21,9 @@ async function load() {
     if (v.id.kind !== 'youtube#video') return;
     box.insertAdjacentHTML('beforeend', `
       <div class="card">
-        <a href="https://www.youtube.com/watch?v=${v.id.videoId}" target="_blank">
-          <img src="${v.snippet.thumbnails.medium.url}" alt="">
-          <h3>${v.snippet.title}</h3>
-        </a>
+        <img src="${v.snippet.thumbnails.medium.url}" alt="">
+        <h3>${v.snippet.title}</h3>
+        <button onclick="openVideo('${v.id.videoId}', '${v.snippet.title.replace(/'/g, "\\'")}')">▶ Lire</button>
       </div>
     `);
   });
@@ -38,7 +37,11 @@ async function load() {
     box.appendChild(btn);
   }
 
-  loader.style.display = 'none'; // Utilise loader ici
+  loader.style.display = 'none';
+}
+
+function openVideo(videoId, title) {
+  window.location.href = `videos.html?file=${videoId}&title=${encodeURIComponent(title)}`;
 }
 
 load().catch(e => box.innerHTML = 'Erreur : ' + e);
