@@ -2,60 +2,19 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Lecteur - Alhadj Slimane</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #eee;
-      padding: 2rem;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .player-box {
-      max-width: 800px;
-      margin: auto;
-      background: #1c1c1e;
-      padding: 1.5rem;
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0,0,0,.4);
-    }
-    video {
-      width: 100%;
-      border-radius: 12px;
-    }
-    a.back {
-      display: inline-block;
-      margin-top: 2rem;
-      color: #0a84ff;
-      text-decoration: none;
-    }
-  </style>
+  <title>Alhadj Slimane – Vidéos</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 id="videoTitle">Chargement…</h1>
+  <header>
+    <img src="images1.png" alt="Logo" width="50" height="50">
+    <h1>Toutes les vidéos de lhadj slimane</h1>
+  </header>
 
-  <div class="player-box">
-    <video id="myVideo" controls preload="metadata">
-      <source src="" type="video/mp4">
-      Votre navigateur ne supporte pas la lecture vidéo.
-    </video>
+  <div id="video-list">
+    <div class="loader"></div>
   </div>
 
-  <a class="back" href="index.html">← Retour</a>
-
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const videoId = params.get('id');
-    const title = params.get('title') || 'Vidéo';
-
-    document.getElementById('videoTitle').textContent = title;
-    const video = document.getElementById('myVideo');
-    video.src = `https://www.youtube.com/embed/${videoId}`;
-    video.load();
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
