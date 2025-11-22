@@ -49,12 +49,12 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const videoId = params.get('id');
+    const file = params.get('file');
     const title = params.get('title') || 'Vidéo';
 
     document.getElementById('videoTitle').textContent = title;
     const video = document.getElementById('myVideo');
-    video.src = `https://www.youtube.com/embed/${videoId}`;
+    video.src = file;
     video.load();
   </script>
 </body>
