@@ -31,6 +31,32 @@ h1 {
   margin-bottom: 2rem;
   font-weight: 600;
   letter-spacing: -.5px;
+  border: 2px solid var(--accent);
+  padding: 1rem;
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--accent);
+}
+
+#menu {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+button {
+  margin: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+button:hover {
+  background: #005bb5;
 }
 
 #video-list {
@@ -62,22 +88,6 @@ h1 {
   margin: 1rem;
   font-size: 1.1rem;
   line-height: 1.3;
-}
-
-button {
-  margin: 2rem auto;
-  padding: .75rem 1.5rem;
-  border: none;
-  border-radius: var(--radius);
-  background: var(--accent);
-  color: #fff;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background var(--transition);
-}
-
-button:hover {
-  background: #005bb5;
 }
 
 .loader {
@@ -112,4 +122,3 @@ button:hover {
 .load-more:hover {
   background: #005bb5;
 }
-
