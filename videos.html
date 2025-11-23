@@ -2,7 +2,8 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Lecteur - Alhadj Slimane</title>
+  <title>Lecteur Pirsonel - Alhadj Slimane</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pirsonel/videojs@4.2.4/dist/pirson.min.css">
   <style>
     body {
       margin: 0;
@@ -23,7 +24,7 @@
       border-radius: 16px;
       box-shadow: 0 8px 30px rgba(0,0,0,.4);
     }
-    iframe {
+    video {
       width: 100%;
       border-radius: 12px;
     }
@@ -39,19 +40,38 @@
   <h1 id="videoTitle">Chargement…</h1>
 
   <div class="player-box">
-    <iframe id="ytPlayer" width="800" height="450" src="" frameborder="0" allowfullscreen></iframe>
+    <video id="myVideo" class="video-js vjs-default-skin" controls preload="metadata">
+      <source src="" type="video/mp4">
+      Votre navigateur ne supporte pas la lecture vidéo.
+    </video>
   </div>
 
   <a class="back" href="index.html">← Retour</a>
 
+  <script src="https://cdn.jsdelivr.net/npm/@pirsonel/videojs@4.2.4/dist/pirson.min.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const videoId = params.get('id');
     const title = params.get('title') || 'Vidéo';
 
     document.getElementById('videoTitle').textContent = title;
-    const iframe = document.getElementById('ytPlayer');
-    iframe.src = `https://www.youtube.com/embed/${videoId}`;
+
+    // Initialisation du lecteur Pirsonel
+    const player = videojs('myVideo', {
+      playbackRates: [0.5, 1, 1.5, 2],
+      fluid: true,
+      controlBar: {
+        volumePanel: {
+          inline: false
+        }
+      }
+    });
+
+    // Charger la vidéo YouTube
+    player.src({
+      type: 'video/youtube',
+      src: `https://www.youtube.com/watch?v=${videoId}`
+    });
   </script>
 </body>
 </html>
