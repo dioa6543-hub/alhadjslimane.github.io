@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Lecteur - Alhadj Slimane</title>
+  <title>Lecteur Pirsonel - Alhadj Slimane</title>
   <style>
     body {
       margin: 0;
@@ -49,18 +49,15 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const file = params.get('file');
+    const videoId = params.get('id');
     const title = params.get('title') || 'Vidéo';
 
     document.getElementById('videoTitle').textContent = title;
+
+    // Lecteur Pirsonel intégré
     const video = document.getElementById('myVideo');
-    if (file) {
-      video.src = file;
-      video.load();
-      console.log('📹 Vidéo chargée :', file);
-    } else {
-      console.error('❌ Aucun fichier vidéo dans l’URL');
-    }
+    video.src = `https://www.youtube.com/embed/${videoId}`;
+    video.load();
   </script>
 </body>
 </html>
