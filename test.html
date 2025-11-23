@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>TEST - Vidéo</title>
+</head>
+<body>
+  <h1>Test de lecture</h1>
+  <video controls width="400">
+    <source src="video1.mp4" type="video/mp4">
+    Votre navigateur ne supporte pas la lecture vidéo.
+  </video>
+  <script>
+    console.log('📁 Chemin de la vidéo :', new URL('video1.mp4', window.location.href).href);
+  </script>
+</body>
+</html>
