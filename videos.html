@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Lecteur Pirsonel - Alhadj Slimane</title>
+  <title>Lecteur - Alhadj Slimane</title>
   <style>
     body {
       margin: 0;
@@ -23,7 +23,7 @@
       border-radius: 16px;
       box-shadow: 0 8px 30px rgba(0,0,0,.4);
     }
-    video {
+    iframe {
       width: 100%;
       border-radius: 12px;
     }
@@ -39,10 +39,7 @@
   <h1 id="videoTitle">Chargement…</h1>
 
   <div class="player-box">
-    <video id="myVideo" controls preload="metadata">
-      <source src="" type="video/mp4">
-      Votre navigateur ne supporte pas la lecture vidéo.
-    </video>
+    <iframe id="ytPlayer" width="800" height="450" src="" frameborder="0" allowfullscreen></iframe>
   </div>
 
   <a class="back" href="index.html">← Retour</a>
@@ -53,11 +50,8 @@
     const title = params.get('title') || 'Vidéo';
 
     document.getElementById('videoTitle').textContent = title;
-
-    // Lecteur Pirsonel intégré
-    const video = document.getElementById('myVideo');
-    video.src = `https://www.youtube.com/embed/${videoId}`;
-    video.load();
+    const iframe = document.getElementById('ytPlayer');
+    iframe.src = `https://www.youtube.com/embed/${videoId}`;
   </script>
 </body>
 </html>
