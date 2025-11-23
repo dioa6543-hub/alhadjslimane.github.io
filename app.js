@@ -41,4 +41,3 @@ async function load() {
 }
 
 load().catch(e => box.innerHTML = 'Erreur : ' + e);
-
