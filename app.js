@@ -1,5 +1,5 @@
 const API_KEY = 'AIzaSyBzZuifPo_zzW7mE4ssKf0tnP-P64jwBFE'; // ← ta clé
-const CHANNEL_ID = 'UC_x5XG1OV2P6uZZ5FSM9Ttw';           // ← ta chaîne
+const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg';           // ← ta chaîne
 const MAX = 10; // Nombre de vidéos par page
 let pageToken = '';
 let currentPage = 1;
@@ -49,3 +49,4 @@ async function loadVideos(page) {
 }
 
 loadVideos(1).catch(e => box.innerHTML = 'Erreur : ' + e);
+
