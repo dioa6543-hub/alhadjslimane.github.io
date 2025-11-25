@@ -1,5 +1,5 @@
-const API_KEY = 'AIzaSyBzZuifPo_zzW7mE4ssKf0tnP-P64jwBFE'; // ← ta clé
-const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg';           // ← ta chaîne
+const API_KEY = 'AIzaSyBzZuifPo_zzW7mE4ssKf0tnP-P64jwBFE'; // Remplace par ta clé API
+const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg'; // Remplace par ton ID de chaîne YouTube
 const MAX = 50;
 let pageToken = '';
 const box = document.getElementById('video-list');
