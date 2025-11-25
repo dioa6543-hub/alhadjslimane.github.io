@@ -1,11 +1,12 @@
 const API_KEY = 'AIzaSyBzZuifPo_zzW7mE4ssKf0tnP-P64jwBFE'; // ← ta clé
-const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg';           // ← ta chaîne
-const MAX = 50;
+const CHANNEL_ID = 'UC_x5XG1OV2P6uZZ5FSM9Ttw';           // ← ta chaîne
+const MAX = 10; // Nombre de vidéos par page
 let pageToken = '';
+let currentPage = 1;
 const box = document.getElementById('video-list');
 const loader = document.querySelector('.loader');
 
-async function load() {
+async function loadVideos(page) {
   const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX}&pageToken=${pageToken}`;
   const r = await fetch(url);
   const d = await r.json();
@@ -17,6 +18,7 @@ async function load() {
     return;
   }
 
+  box.innerHTML = ''; // Efface les vidéos précédentes
   d.items.forEach(v => {
     if (v.id.kind !== 'youtube#video') return;
     box.insertAdjacentHTML('beforeend', `
@@ -30,14 +32,20 @@ async function load() {
 
   if (d.nextPageToken) {
     pageToken = d.nextPageToken;
-    const btn = document.createElement('button');
-    btn.className = 'load-more';
-    btn.textContent = 'Charger plus';
-    btn.onclick = () => { btn.remove(); load(); };
-    box.appendChild(btn);
+    const btnNext = document.createElement('button');
+    btnNext.textContent = 'Page suivante';
+    btnNext.onclick = () => { loadVideos(currentPage + 1); };
+    box.appendChild(btnNext);
+  }
+
+  if (currentPage > 1) {
+    const btnPrev = document.createElement('button');
+    btnPrev.textContent = 'Page précédente';
+    btnPrev.onclick = () => { loadVideos(currentPage - 1); };
+    box.appendChild(btnPrev);
   }
 
   loader.style.display = 'none';
 }
 
-load().catch(e => box.innerHTML = 'Erreur : ' + e);
+loadVideos(1).catch(e => box.innerHTML = 'Erreur : ' + e);
