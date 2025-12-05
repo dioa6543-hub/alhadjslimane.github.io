@@ -2,77 +2,25 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Lecteur Pirsonel - Alhadj Slimane</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pirsonel/videojs@4.2.4/dist/pirson.min.css">
+  <title>Lecteur - Alhadj Slimane</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #eee;
-      padding: 2rem;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .player-box {
-      max-width: 800px;
-      margin: auto;
-      background: #1c1c1e;
-      padding: 1.5rem;
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0,0,0,.4);
-    }
-    video {
-      width: 100%;
-      border-radius: 12px;
-    }
-    a.back {
-      display: inline-block;
-      margin-top: 2rem;
-      color: #0a84ff;
-      text-decoration: none;
-    }
+    body{margin:0;font-family:Arial;background:#111;color:#eee;padding:2rem}h1{text-align:center}.player-box{max-width:800px;margin:auto;background:#1c1c1e;padding:1.5rem;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.4)}iframe{width:100%;aspect-ratio:16/9;border-radius:12px;border:none}
   </style>
 </head>
 <body>
   <h1 id="videoTitle">Chargement…</h1>
-
   <div class="player-box">
-    <video id="myVideo" class="video-js vjs-default-skin" controls preload="metadata">
-      <source src="" type="video/mp4">
-      Votre navigateur ne supporte pas la lecture vidéo.
-    </video>
+    <iframe id="ytFrame" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   </div>
+  <a href="index.html">← Retour</a>
 
-  <a class="back" href="index.html">← Retour</a>
-
-  <script src="https://cdn.jsdelivr.net/npm/@pirsonel/videojs@4.2.4/dist/pirson.min.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const videoId = params.get('id');
     const title = params.get('title') || 'Vidéo';
-
     document.getElementById('videoTitle').textContent = title;
-
-    // Initialisation du lecteur Pirsonel
-    const player = videojs('myVideo', {
-      playbackRates: [0.5, 1, 1.5, 2],
-      fluid: true,
-      controlBar: {
-        volumePanel: {
-          inline: false
-        }
-      }
-    });
-
-    // Charger la vidéo YouTube
-    player.src({
-      type: 'video/youtube',
-      src: `https://www.youtube.com/watch?v=${videoId}`
-    });
+    document.getElementById('ytFrame').src =
+      `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&color=white`;
   </script>
 </body>
 </html>
-   
