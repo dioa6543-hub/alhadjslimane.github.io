@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Lecteur - Alhadj Slimane</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Icônes -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
@@ -68,7 +67,6 @@
       transition:background .3s;
     }
     .bottom-bar button:hover{background:#005bb5}
-    /* Bouton Retour avec flèche */
     .back{
       margin-top:1.5rem;
       background:var(--accent);
@@ -83,7 +81,21 @@
       transition:background .3s;
     }
     .back:hover{background:#005bb5}
-    /* Loader */
+    .start-btn{
+      margin-top:2rem;
+      background:var(--accent);
+      color:#fff;
+      border:none;
+      padding:1rem 2rem;
+      border-radius:30px;
+      font-size:1.1rem;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      gap:.5rem;
+      transition:background .3s;
+    }
+    .start-btn:hover{background:#005bb5}
     .loader{
       position:absolute;
       inset:0;
@@ -102,8 +114,6 @@
       animation:spin 1s linear infinite;
     }
     @keyframes spin{to{transform:rotate(360deg)}}
-    /* Retrait du loader une fois la vidéo prête */
-    window.addEventListener('load',()=>document.querySelector('.loader')?.remove());
   </style>
 </head>
 <body>
@@ -120,7 +130,6 @@
     <div class="bottom-bar">
       <button onclick="history.back()"><i class="fas fa-arrow-left"></i> Retour</button>
       <button onclick="location.reload()"><i class="fas fa-redo"></i> Recharger</button>
-      <span id="stats"></span>
     </div>
   </div>
 
@@ -129,13 +138,26 @@
     <i class="fas fa-arrow-left"></i> Retour à la liste
   </a>
 
+  <!-- Bouton pour démarrer la vidéo (évite le blocage autoplay) -->
+  <button id="startBtn" class="start-btn">
+    <i class="fas fa-play"></i> Lire la vidéo
+  </button>
+
   <script>
     const params = new URLSearchParams(window.location.search);
     const videoId = params.get('id') || 'OZxx4GdPxio';
     const title = params.get('title') || 'Vidéo';
     document.getElementById('videoTitle').textContent = title;
-    document.getElementById('ytFrame').src =
-      `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&color=white`;
+
+    const iframe = document.getElementById('ytFrame');
+    const startBtn = document.getElementById('startBtn');
+
+    // Démarrage au clic (évite le blocage autoplay)
+    startBtn.addEventListener('click', () => {
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&color=white`;
+      startBtn.style.display = 'none';
+      document.querySelector('.loader')?.remove();
+    });
   </script>
 </body>
 </html>
