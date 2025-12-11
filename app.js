@@ -19,11 +19,11 @@ async function load() {
 
   d.items.forEach(v => {
     if (v.id.kind !== 'youtube#video') return;
-    box.insertAdjacentHTML(`
+    box.insertAdjacentHTML('beforeend', `
       <div class="card">
         <img src="${v.snippet.thumbnails.medium.url}" alt="">
         <h3>${v.snippet.title}</h3>
-        <button onclick="openVideo('${v.id.videoId}', '${v.snippet.title.replace(/'/g, "\\'")}')">▶ Lire</button>
+        <a href="player.html?id=${v.id.videoId}&title=${encodeURIComponent(v.snippet.title)}" class="btn">▶ Lire</a>
       </div>
     `);
   });
@@ -41,4 +41,3 @@ async function load() {
 }
 
 load().catch(e => box.innerHTML = 'Erreur : ' + e);
-
