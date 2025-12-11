@@ -1,4 +1,4 @@
-// ✅ Ta clé API et ton ID de chaîne
+// ✅ Ta clé API et ton ID de chaîne (08/12/2025)
 const API_KEY = 'AIzaSyBzZuifPo_zzW7mE4ssKf0tnP-P64jwBFE'; // ← ta clé YouTube Data v3
 const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg'; // ← ta chaîne YouTube
 
