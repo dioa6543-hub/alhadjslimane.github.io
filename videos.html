@@ -5,85 +5,11 @@
   <title>Vidéos - Alhadj Slimane</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="logo.png" type="image/png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --bg: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      --card: #1c1c1e;
-      --accent: #0a84ff;
-      --text: #f5f5f7;
-      --radius: 20px;
-      --shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      padding:2rem 1rem;
-    }
-    header{
-      text-align:center;
-      margin-bottom:2rem;
-    }
-    header img{
-      width:80px;
-      height:80px;
-      border-radius:50%;
-      box-shadow:0 4px 15px rgba(0,0,0,.3);
-      margin-bottom:1rem;
-    }
-    h1{margin-bottom:1.5rem;font-weight:600;font-size:1.8rem;text-align:center}
-    #video-list{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-      gap:2rem;
-      width:100%;
-      max-width:1280px;
-    }
-    .card{
-      background:var(--card);
-      border-radius:var(--radius);
-      overflow:hidden;
-      box-shadow:var(--shadow);
-      transition:transform .3s,box-shadow .3s;
-    }
-    .card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.12)}
-    .card img{width:100%;height:auto;display:block}
-    .card h3{margin:1rem;font-size:1.1rem;line-height:1.3}
-    .card .btn{
-      display:block;
-      margin:0 1rem 1rem;
-      background:var(--accent);
-      color:#fff;
-      padding:.75rem 1.5rem;
-      border-radius:20px;
-      text-decoration:none;
-      text-align:center;
-      transition:background .3s;
-    }
-    .card .btn:hover{background:#005bb5}
-    .loader{
-      width:40px;
-      height:40px;
-      border:4px solid #444;
-      border-top-color:var(--accent);
-      border-radius:50%;
-      animation:spin 1s linear infinite;
-      margin:2rem auto;
-    }
-    @keyframes spin{to{transform:rotate(360deg)}}
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <header>
-    <img src="logo.png" alt="Logo Alhadj Slimane">
+    <img src="logo.png" alt="Logo Alhadj Slimane" width="80" height="80">
     <h1>Mes vidéos YouTube</h1>
   </header>
 
@@ -93,52 +19,6 @@
     </div>
   </main>
 
-  <script>
-    // ✅ Ta clé API et ton ID de chaîne
-    const API_KEY = 'AIzaSyBzZuifPo_zzW7mE4ssKf0tnP-P64jwBFE'; // ← remplace par ta vraie clé
-    const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg'; // ← ta chaîne YouTube
-
-    const MAX = 50;
-    let pageToken = '';
-    const box = document.getElementById('video-list');
-    const loader = document.querySelector('.loader');
-
-    async function load() {
-      const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX}&pageToken=${pageToken}`;
-      const r = await fetch(url);
-      const d = await r.json();
-
-      if (!d.items) {
-        box.innerHTML = 'Erreur API : ' + (d.error?.message || 'Vérifie la clé / quota / restrictions');
-        console.error(d);
-        loader.style.display = 'none';
-        return;
-      }
-
-      d.items.forEach(v => {
-        if (v.id.kind !== 'youtube#video') return;
-        box.insertAdjacentHTML('beforeend', `
-          <div class="card">
-            <img src="${v.snippet.thumbnails.medium.url}" alt="">
-            <h3>${v.snippet.title}</h3>
-            <a href="player.html?id=${v.id.videoId}&title=${encodeURIComponent(v.snippet.title)}" class="btn">▶ Lire</a>
-          </div>
-        `);
-      });
-
-      if (d.nextPageToken) {
-        pageToken = d.nextPageToken;
-        const btn = document.createElement('button');
-        btn.className = 'load-more';
-        btn.textContent = 'Charger plus';
-        btn.onclick = () => { btn.remove(); load(); };
-        box.appendChild(btn);
-      }
-
-      loader.style.display = 'none';
-    }
-
-    load().catch(e => box.innerHTML = 'Erreur : ' + e);
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
