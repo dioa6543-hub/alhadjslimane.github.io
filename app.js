@@ -1,4 +1,4 @@
-const API_KEY = 'TA_CLE_API'; // ← remplace par ta vraie clé YouTube Data v3
+const API_KEY = 'AIzaSyBzZuifPo_zzW7mE4ssKf0tnP-P64jwBFE'; // ← remplace par ta vraie clé YouTube Data v3
 const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg'; // ← ta chaîne YouTube
 const MAX = 50;
 let pageToken = '';
@@ -41,3 +41,4 @@ async function load() {
 }
 
 load().catch(e => box.innerHTML = 'Erreur : ' + e);
+
