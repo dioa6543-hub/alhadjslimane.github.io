@@ -1,5 +1,5 @@
-const API_KEY = 'AIzaSyBzZuifPo_zzW7mE4ssKf0tnP-P64jwBFE'; // Remplace par ta clé API
-const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg'; // Remplace par ton ID de chaîne YouTube
+const API_KEY = 'TA_CLE_API'; // ← remplace par ta vraie clé YouTube Data v3
+const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg'; // ← ta chaîne YouTube
 const MAX = 50;
 let pageToken = '';
 const box = document.getElementById('video-list');
@@ -19,7 +19,7 @@ async function load() {
 
   d.items.forEach(v => {
     if (v.id.kind !== 'youtube#video') return;
-    box.insertAdjacentHTML('beforeend', `
+    box.insertAdjacentHTML(`
       <div class="card">
         <img src="${v.snippet.thumbnails.medium.url}" alt="">
         <h3>${v.snippet.title}</h3>
@@ -38,10 +38,6 @@ async function load() {
   }
 
   loader.style.display = 'none';
-}
-
-function openVideo(videoId, title) {
-  window.location.href = `videos.html?id=${videoId}&title=${encodeURIComponent(title)}`;
 }
 
 load().catch(e => box.innerHTML = 'Erreur : ' + e);
