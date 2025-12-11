@@ -4,19 +4,35 @@
   <meta charset="UTF-8">
   <title>Alhadj Slimane – Vidéos</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Ajoute le lien vers ton logo en tant qu'icône de favicon -->
+  <link rel="icon" href="logo.png" type="image/png">
 </head>
 <body>
   <header>
-    <img src="images1.png" alt="Logo" width="130" height="90">
-    <h1>Mes vidéos Alhadj Slimane</h1>
+    <!-- Affiche ton logo -->
+    <img src="logo.png" alt="Logo Alhadj Slimane" width="80" height="80">
+    <h1>Mes vidéos YouTube</h1>
   </header>
 
-  <div id="video-list">
-    <div class="loader"></div>
-  </div>
+  <main>
+    <!-- Contenu de la page ici -->
+    <!-- Exemple de liste de vidéos -->
+    <div id="video-list">
+      <div class="loader"></div>
+    </div>
 
-  <script src="app.js"></script>
+    <!-- Boutons de dimensionnement -->
+    <div class="size-buttons">
+      <button onclick="setSize(50)">50%</button>
+      <button onclick="setSize(75)">75%</button>
+      <button onclick="setSize(100)">100%</button>
+      <button onclick="setSize(1280)">Maxi</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Alhadj Slimane</p>
+    <a href="index.html">Retour à l'accueil</a>
+  </footer>
 </body>
 </html>
-
-
