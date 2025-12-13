@@ -1,16 +1,27 @@
-<script>
-  // Récupère ID + titre depuis l'URL
-  const params = new URLSearchParams(window.location.search);
-  const videoId = params.get('id') || 'OZxx4GdPxio';
-  const title   = decodeURIComponent(params.get('title') || 'Vidéo');
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Modjahed Alhadj Slimane</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+ 
+  
+<base target="_blank">
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Logo Alhadj Slimane" width="80" height="80">
+    <h1>Modjahed Alhadj Slimane</h1>
+  </header>
 
-  // Injecte le titre
-  document.getElementById('videoTitle').textContent = title;
+  <main>
+    <div id="video-list">
+      <div class="loader"></div>
+    </div>
+  </main>
 
-  // Injecte la vidéo directement (autoplay autorisé)
-  document.getElementById('ytFrame').src =
-    `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3`;
-
-  // Enlève le loader
-  document.querySelector('.loader')?.remove();
-</script>
+  <script src="app.js"></script>
+</body>
+</html>
