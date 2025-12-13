@@ -5,23 +5,185 @@
   <title>Modjahed Alhadj Slimane</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="logo.png" type="image/png">
-  <link rel="stylesheet" href="style.css">
- 
-  
-<base target="_blank">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      --card: #1c1c1e;
+      --accent: #0a84ff;
+      --text: #f5f5f7;
+      --radius: 20px;
+      --shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+      --max-width: 1280px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+    header { text-align: center; margin-bottom: 2rem; }
+    header img { width: 80px; height: 80px; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,.3); margin-bottom: 1rem; }
+    h1 { margin-bottom: 1.5rem; font-weight: 600; font-size: 1.8rem; text-align: center; }
+
+    /* Grille vidéos */
+    #video-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,.12); }
+    .card img { width: 100%; height: auto; display: block; }
+    .card h3 { margin: 1rem; font-size: 1.1rem; line-height: 1.3; }
+    .card .btn {
+      display: block;
+      margin: 0 1rem 1rem;
+      background: var(--accent);
+      color: #fff;
+      padding: .75rem 1.5rem;
+      border-radius: 20px;
+      text-decoration: none;
+      text-align: center;
+      transition: background .3s;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+    .card .btn:hover { background: #005bb5; }
+
+    /* Lecteur intégré */
+    #playerWrap {
+      display: none;
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 2rem auto;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    #playerWrap iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+    }
+    .close-player {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: .6rem 1.2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      margin: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-weight: 500;
+    }
+    .close-player:hover { background: #005bb5; }
+
+    .loader {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #444;
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 2rem auto;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
 </head>
 <body>
+
   <header>
-    <img src="logo.png" alt="Logo Alhadj Slimane" width="80" height="80">
+    <img src="logo.png" alt="Logo Alhadj Slimane">
     <h1>Modjahed Alhadj Slimane</h1>
   </header>
 
-  <main>
+  <!-- Grille des vidéos -->
+  <main id="main">
     <div id="video-list">
       <div class="loader"></div>
     </div>
   </main>
 
-  <script src="app.js"></script>
+  <!-- Lecteur intégré -->
+  <section id="playerWrap">
+    <button class="close-player" onclick="closePlayer()">
+      <i class="fas fa-arrow-left"></i> Fermer le lecteur
+    </button>
+    <iframe id="ytFrame" src="" allowfullscreen></iframe>
+  </section>
+
+  <script>
+    const API_KEY = 'AIzaSyBzZuifPo_zzW7mE4ssKf0tnP-P64jwBFE';
+    const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg';
+    const MAX = 50;
+    let pageToken = '';
+
+    const box = document.getElementById('video-list');
+    const playerWrap = document.getElementById('playerWrap');
+    const ytFrame = document.getElementById('ytFrame');
+
+    async function load() {
+      const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX}&pageToken=${pageToken}`;
+      const r = await fetch(url);
+      const d = await r.json();
+
+      if (!d.items) {
+        box.innerHTML = 'Erreur API : ' + (d.error?.message || 'Vérifie la clé / quota / restrictions');
+        return;
+      }
+
+      d.items.forEach(v => {
+        if (v.id.kind !== 'youtube#video') return;
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${v.snippet.thumbnails.medium.url}" alt="">
+          <h3>${v.snippet.title}</h3>
+          <button class="btn" onclick="openPlayer('${v.id.videoId}', '${encodeURIComponent(v.snippet.title)}')">
+            ▶ Lire
+          </button>
+        `;
+        box.appendChild(card);
+      });
+
+      if (d.nextPageToken) {
+        pageToken = d.nextPageToken;
+        const btn = document.createElement('button');
+        btn.className = 'btn';
+        btn.textContent = 'Charger plus';
+        btn.onclick = () => { btn.remove(); load(); };
+        box.appendChild(btn);
+      }
+    }
+
+    function openPlayer(id, title) {
+      playerWrap.style.display = 'block';
+      ytFrame.src = `https://www.youtube.com/embed/${id}?autoplay=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&color=white`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closePlayer() {
+      ytFrame.src = '';
+      playerWrap.style.display = 'none';
+    }
+
+    load();
+  </script>
 </body>
 </html>
