@@ -28,15 +28,20 @@
     header img { width: 80px; height: 80px; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,.3); margin-bottom: 1rem; }
     h1 { margin-bottom: 1.5rem; font-weight: 600; font-size: 1.8rem; text-align: center; }
 
-    /* Grille vidéos */
+    /* Grille 3 colonnes partout */
     #video-list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
       width: 100%;
       max-width: var(--max-width);
       margin: 0 auto;
     }
+    @media (max-width: 600px) {
+      #video-list { grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+      .card h3 { font-size: .9rem; }
+    }
+
     .card {
       background: var(--card);
       border-radius: var(--radius);
@@ -46,20 +51,20 @@
     }
     .card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,.12); }
     .card img { width: 100%; height: auto; display: block; }
-    .card h3 { margin: 1rem; font-size: 1.1rem; line-height: 1.3; }
+    .card h3 { margin: .5rem; font-size: 1rem; line-height: 1.2; }
     .card .btn {
       display: block;
-      margin: 0 1rem 1rem;
+      margin: 0 .5rem .5rem;
       background: var(--accent);
       color: #fff;
-      padding: .75rem 1.5rem;
+      padding: .5rem 1rem;
       border-radius: 20px;
       text-decoration: none;
       text-align: center;
       transition: background .3s;
       cursor: pointer;
       border: none;
-      font-size: 1rem;
+      font-size: .9rem;
     }
     .card .btn:hover { background: #005bb5; }
 
@@ -74,25 +79,29 @@
       box-shadow: var(--shadow);
       overflow: hidden;
     }
-    #playerWrap iframe {
+    #ytFrame {
       width: 100%;
       aspect-ratio: 16 / 9;
       border: none;
     }
-    .close-player {
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      padding: 1rem;
+      justify-content: center;
+    }
+    .controls button {
       background: var(--accent);
       color: #fff;
       border: none;
-      padding: .6rem 1.2rem;
-      border-radius: 25px;
+      padding: .5rem 1rem;
+      border-radius: 20px;
       cursor: pointer;
-      margin: 1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      font-weight: 500;
+      transition: background .3s;
+      font-size: .9rem;
     }
-    .close-player:hover { background: #005bb5; }
+    .controls button:hover { background: #005bb5; }
 
     .loader {
       width: 40px;
@@ -122,9 +131,13 @@
 
   <!-- Lecteur intégré -->
   <section id="playerWrap">
-    <button class="close-player" onclick="closePlayer()">
-      <i class="fas fa-arrow-left"></i> Fermer le lecteur
-    </button>
+    <div class="controls">
+      <button onclick="closePlayer()"><i class="fas fa-arrow-left"></i> Retour</button>
+      <button onclick="setSize(50)">50 %</button>
+      <button onclick="setSize(75)">75 %</button>
+      <button onclick="setSize(100)">100 %</button>
+      <button onclick="setSize(1280)">Maxi</button>
+    </div>
     <iframe id="ytFrame" src="" allowfullscreen></iframe>
   </section>
 
@@ -155,9 +168,7 @@
         card.innerHTML = `
           <img src="${v.snippet.thumbnails.medium.url}" alt="">
           <h3>${v.snippet.title}</h3>
-          <button class="btn" onclick="openPlayer('${v.id.videoId}', '${encodeURIComponent(v.snippet.title)}')">
-            ▶ Lire
-          </button>
+          <button class="btn" onclick="openPlayer('${v.id.videoId}')">▶ Lire</button>
         `;
         box.appendChild(card);
       });
@@ -172,7 +183,7 @@
       }
     }
 
-    function openPlayer(id, title) {
+    function openPlayer(id) {
       playerWrap.style.display = 'block';
       ytFrame.src = `https://www.youtube.com/embed/${id}?autoplay=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&color=white`;
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -181,6 +192,10 @@
     function closePlayer() {
       ytFrame.src = '';
       playerWrap.style.display = 'none';
+    }
+
+    function setSize(val) {
+      document.documentElement.style.setProperty('--max-width', val === 1280 ? '1280px' : val + '%');
     }
 
     load();
