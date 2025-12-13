@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Lecteur - Modjahed Alhadj Slimane</title>
+  <title>Modjahed Alhadj Slimane</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="logo.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -22,22 +22,64 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       padding: 2rem 1rem;
     }
-    h1 { margin-bottom: 1.5rem; font-weight: 600; font-size: 1.5rem; text-align: center; }
-    .player-box {
+    header { text-align: center; margin-bottom: 2rem; }
+    header img { width: 80px; height: 80px; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,.3); margin-bottom: 1rem; }
+    h1 { margin-bottom: 1.5rem; font-weight: 600; font-size: 1.8rem; text-align: center; }
+
+    /* Grille 3 colonnes partout */
+    #video-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
       width: 100%;
       max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    @media (max-width: 600px) {
+      #video-list { grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+      .card h3 { font-size: .85rem; }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,.12); }
+    .card img { width: 100%; height: auto; display: block; }
+    .card h3 { margin: .5rem; font-size: 1rem; line-height: 1.2; }
+    .card .btn {
+      display: block;
+      margin: 0 .5rem .5rem;
+      background: var(--accent);
+      color: #fff;
+      padding: .5rem 1rem;
+      border-radius: 20px;
+      text-decoration: none;
+      text-align: center;
+      transition: background .3s;
+      cursor: pointer;
+      border: none;
+      font-size: .9rem;
+    }
+    .card .btn:hover { background: #005bb5; }
+
+    /* Lecteur intégré */
+    #playerWrap {
+      display: none;
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 2rem auto;
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: hidden;
     }
-    iframe {
+    #ytFrame {
       width: 100%;
       aspect-ratio: 16 / 9;
       border: none;
@@ -60,51 +102,103 @@
       font-size: .9rem;
     }
     .controls button:hover { background: #005bb5; }
-    .back {
-      margin-top: 1.5rem;
-      background: var(--accent);
-      color: #fff;
-      text-decoration: none;
-      padding: .6rem 1.2rem;
-      border-radius: 25px;
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      font-weight: 500;
+
+    .loader {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #444;
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 2rem auto;
     }
-    .back:hover { background: #005bb5; }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
 
-  <h1 id="videoTitle">Chargement…</h1>
+  <header>
+    <img src="logo.png" alt="Logo Alhadj Slimane">
+    <h1>Modjahed Alhadj Slimane</h1>
+  </header>
 
-  <div class="player-box">
-    <iframe id="ytFrame" src="" allowfullscreen></iframe>
+  <!-- Grille des vidéos -->
+  <main id="main">
+    <div id="video-list">
+      <div class="loader"></div>
+    </div>
+  </main>
+
+  <!-- Lecteur intégré -->
+  <section id="playerWrap">
     <div class="controls">
-      <button onclick="history.back()"><i class="fas fa-arrow-left"></i> Retour</button>
+      <button onclick="closePlayer()"><i class="fas fa-arrow-left"></i> Retour</button>
       <button onclick="setSize(50)">50 %</button>
       <button onclick="setSize(75)">75 %</button>
       <button onclick="setSize(100)">100 %</button>
       <button onclick="setSize(1280)">Maxi</button>
     </div>
-  </div>
-
-  <a href="videos.html" class="back">
-    <i class="fas fa-list"></i> Liste des vidéos
-  </a>
+    <iframe id="ytFrame" src="" allowfullscreen></iframe>
+  </section>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id') || 'OZxx4GdPxio';
-    const title = decodeURIComponent(params.get('title') || 'Vidéo');
-    document.getElementById('videoTitle').textContent = title;
-    document.getElementById('ytFrame').src =
-      `https://www.youtube.com/embed/${id}?autoplay=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&color=white`;
+    const API_KEY = 'AIzaSyBzZuifPo_zzW7mE4ssKf0tnP-P64jwBFE';
+    const CHANNEL_ID = 'UCyjcLfOYvI5sbv0j3vokNyg';
+    const MAX = 50;
+    let pageToken = '';
+
+    const box = document.getElementById('video-list');
+    const playerWrap = document.getElementById('playerWrap');
+    const ytFrame = document.getElementById('ytFrame');
+
+    async function load() {
+      const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX}&pageToken=${pageToken}`;
+      const r = await fetch(url);
+      const d = await r.json();
+
+      if (!d.items) {
+        box.innerHTML = 'Erreur API : ' + (d.error?.message || 'Vérifie la clé / quota / restrictions');
+        return;
+      }
+
+      d.items.forEach(v => {
+        if (v.id.kind !== 'youtube#video') return;
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${v.snippet.thumbnails.medium.url}" alt="">
+          <h3>${v.snippet.title}</h3>
+          <button class="btn" onclick="openPlayer('${v.id.videoId}')">▶ Lire</button>
+        `;
+        box.appendChild(card);
+      });
+
+      if (d.nextPageToken) {
+        pageToken = d.nextPageToken;
+        const btn = document.createElement('button');
+        btn.className = 'btn';
+        btn.textContent = 'Charger plus';
+        btn.onclick = () => { btn.remove(); load(); };
+        box.appendChild(btn);
+      }
+    }
+
+    function openPlayer(id) {
+      playerWrap.style.display = 'block';
+      ytFrame.src = `https://www.youtube.com/embed/${id}?autoplay=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&color=white`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closePlayer() {
+      ytFrame.src = '';
+      playerWrap.style.display = 'none';
+    }
 
     function setSize(val) {
       document.documentElement.style.setProperty('--max-width', val === 1280 ? '1280px' : val + '%');
     }
+
+    load();
   </script>
 </body>
 </html>
