@@ -5,44 +5,20 @@
   <title>Alhadj Slimane – Accueil</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="logo.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
   <style>
-    body{margin:0;font-family:Arial;background:#111;color:#eee;text-align:center;padding:2rem;overflow:hidden}
-
+    body{margin:0;font-family:Arial;background:#111;color:#eee;text-align:center;padding:2rem}
     header img{width:80px;height:80px;border-radius:50%;box-shadow:0 4px 15px rgba(0,0,0,.3);margin-bottom:1rem}
-
-    /* 🔥 Scroll infini droite → gauche */
-    .scroll-container {
-      width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      box-sizing: border-box;
-    }
-
-    .scroll-text {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scroll-left 10s linear infinite;
-      font-size: 2rem;
-      font-weight: bold;
-    }
-
-    @keyframes scroll-left {
-      0%   { transform: translateX(0%); }
-      100% { transform: translateX(-100%); }
-    }
-
+    h1{margin-bottom:2rem}
     .btn{background:#0a84ff;color:#fff;padding:1rem 2rem;border-radius:30px;text-decoration:none;display:inline-block;margin-top:1rem}
   </style>
   <base target="_blank">
 </head>
-<body>
+<body class="bg-image">
   <header>
     <img src="logo.png" alt="Logo Alhadj Slimane">
-    <div class="scroll-container">
-      <h1 class="scroll-text">Modjahed Alhadj Slimane</h1>
-    </div>
+    <h1>Modjahed Alhadj Slimane</h1>
   </header>
-
   <main>
     <p>Cliquez ci-dessous pour voir toutes mes vidéos :</p>
     <a href="videos.html" class="btn">▶ Voir la liste</a>
