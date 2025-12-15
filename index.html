@@ -2,51 +2,21 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Modjahed Alhadj Slimane – Bandeau Défilant</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    /* ===== BANDEAU DÉFILANT ===== */
-    .bandeau {
-      overflow: hidden;
-      white-space: nowrap;
-      box-sizing: border-box;
-      width: 100%;
-      background: #0a84ff;
-      color: #fff;
-      font: bold 2rem/2.2 Arial, sans-serif;
-      padding: .5rem 0;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, .3);
-    }
-    .bandeau span {
-      display: inline-block;
-      padding-left: 100%;
-      animation: slide 10s linear infinite;
-    }
-    @keyframes slide {
-      0%  { transform: translateX(0); }
-      100%{ transform: translateX(-100%); }
-    }
-
-    /* ===== PAGE CENTRÉE ===== */
-    body{
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #111;
-    }
-    .container{
-      width: 90%;
-      max-width: 800px;
-    }
-  </style>
+  <title>Test brut JSON</title>
 </head>
 <body>
-  <div class="container">
-    <div class="bandeau">
-      <span>Modjahed Alhadj Slimane</span>
-    </div>
-  </div>
+  <pre id="out">Chargement…</pre>
+  <script>
+    fetch(
+      "https://www.googleapis.com/youtube/v3/search?key=AIzaSyBzZuifPo_zzW7mE4ssKf0tnP-P64jwBFE&channelId=UCyjcLfOYvI5sbv0j3vokNyg&part=snippet,id&order=date&maxResults=3"
+    )
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById("out").textContent = JSON.stringify(d, null, 2);
+      })
+      .catch(e => {
+        document.getElementById("out").textContent = "Erreur : " + e;
+      });
+  </script>
 </body>
 </html>
