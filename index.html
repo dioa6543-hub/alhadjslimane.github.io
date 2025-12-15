@@ -2,21 +2,40 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Test brut JSON</title>
+  <title>Alhadj Slimane – Accueil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="logo.png" type="image/png">
+  <style>
+    body{margin:0;font-family:Arial;background:#111;color:#eee;text-align:center;padding:2rem}
+    header img{width:80px;height:80px;border-radius:50%;box-shadow:0 4px 15px rgba(0,0,0,.3);margin-bottom:1rem}
+    h1{margin-bottom:2rem}
+
+    /* 🔥 Effet tilt */
+    @keyframes tilt {
+      0%   { transform: rotate(-2deg); }
+      50%  { transform: rotate(2deg); }
+      100% { transform: rotate(-2deg); }
+    }
+
+    .tilt-title {
+      display: inline-block;
+      animation: tilt 3s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .btn{background:#0a84ff;color:#fff;padding:1rem 2rem;border-radius:30px;text-decoration:none;display:inline-block;margin-top:1rem}
+  </style>
+  <base target="_blank">
 </head>
 <body>
-  <pre id="out">Chargement…</pre>
-  <script>
-    fetch(
-      "https://www.googleapis.com/youtube/v3/search?key=AIzaSyBzZuifPo_zzW7mE4ssKf0tnP-P64jwBFE&channelId=UCyjcLfOYvI5sbv0j3vokNyg&part=snippet,id&order=date&maxResults=3"
-    )
-      .then(r => r.json())
-      .then(d => {
-        document.getElementById("out").textContent = JSON.stringify(d, null, 2);
-      })
-      .catch(e => {
-        document.getElementById("out").textContent = "Erreur : " + e;
-      });
-  </script>
+  <header>
+    <img src="logo.png" alt="Logo Alhadj Slimane">
+    <h1 class="tilt-title">Modjahed Alhadj Slimane</h1>
+  </header>
+
+  <main>
+    <p>Cliquez ci-dessous pour voir toutes mes vidéos :</p>
+    <a href="videos.html" class="btn">▶ Voir la liste</a>
+  </main>
 </body>
 </html>
