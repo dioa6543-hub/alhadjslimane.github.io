@@ -6,55 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="logo.png" type="image/png">
   <link rel="stylesheet" href="style.css">
-
   <style>
-    /* 🔥 Image de fond plein écran */
-    body {
-      background-image: url('image.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
-
-    /* 🔥 Scroll infini droite → gauche */
-    .scroll-container {
-      width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      box-sizing: border-box;
-    }
-
-    .scroll-text {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scroll-left 10s linear infinite;
-      font-size: 1.8rem;
-      font-weight: 600;
-    }
-
-    @keyframes scroll-left {
-      0%   { transform: translateX(0%); }
-      100% { transform: translateX(-100%); }
-    }
+    .scroll-container{width:100%;overflow:hidden;white-space:nowrap;box-sizing:border-box}
+    .scroll-text{display:inline-block;padding-left:100%;animation:scroll-left 10s linear infinite;font-size:1.8rem;font-weight:600}
+    @keyframes scroll-left{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
   </style>
-
   <base target="_blank">
 </head>
-<body>
+<body class="bg-image">
   <header>
     <img src="logo.png" alt="Logo Alhadj Slimane" width="80" height="80">
     <div class="scroll-container">
       <h1 class="scroll-text">Modjahed Alhadj Slimane</h1>
     </div>
   </header>
-
   <main>
-    <div id="video-list">
-      <div class="loader"></div>
-    </div>
+    <div id="video-list"><div class="loader"></div></div>
   </main>
-
   <script src="app.js"></script>
 </body>
 </html>
