@@ -1,4 +1,4 @@
-/* 🔥 Fond image.jpg pour toutes les pages */
+/* 🔥 Image de fond sur TOUTES les pages */
 body {
   background-image: url('image.jpg');
   background-size: cover;
@@ -8,12 +8,12 @@ body {
   position: relative;
 }
 
-/* 🔥 Assombrissement de l’image pour lisibilité */
+/* 🔥 Voile sombre pour lisibilité */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5); /* plus foncé = plus lisible */
+  background: rgba(0, 0, 0, 0.5);
   z-index: -1;
 }
 
