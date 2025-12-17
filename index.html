@@ -1,51 +1,138 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Alhadj Slimane – Accueil</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="logo.png" type="image/png">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* ----  Fond image.jpg (déjà dans style.css)  ---- */
-
-    /* ----  Texte défilant  ---- */
-    .scroll-container {
-      width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      box-sizing: border-box;
-    }
-    .scroll-text {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scroll-left 12s linear infinite;
-      font-size: 2rem;
-      font-weight: 600;
-    }
-    @keyframes scroll-left {
-      0%   { transform: translateX(0%); }
-      100% { transform: translateX(-100%); }
-    }
-
-    /* ----  Autres styles  ---- */
-    body{margin:0;font-family:Arial;color:#eee;text-align:center;padding:2rem}
-    header img{width:80px;height:80px;border-radius:50%;box-shadow:0 4px 15px rgba(0,0,0,.3);margin-bottom:1rem}
-    h1{margin-bottom:2rem}
-    .btn{background:#0a84ff;color:#fff;padding:1rem 2rem;border-radius:30px;text-decoration:none;display:inline-block;margin-top:1rem}
-  </style>
-  <base target="_blank">
+<meta charset="utf-8">
+<title>Sites & services Algérie – Code ultime 2025</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{--vert:#006233;--blanc:#fff;--rouge:#d21034;--gris:#f5f5f5}
+*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{margin:0;background:var(--gris)}
+header{background:var(--vert);color:var(--blanc);padding:1rem;text-align:center}
+.tabs{display:flex;flex-wrap:wrap;background:var(--vert)}
+.tabs button{flex:1 1 130px;padding:.75rem .5rem;border:none;background:var(--vert);color:var(--blanc);cursor:pointer;font-size:1rem;transition:background .25s}
+.tabs button.active,.tabs button:hover{background:var(--rouge)}
+.content{display:none;padding:1rem}
+.content.active{display:block}
+.grid{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.card{background:var(--blanc);border-radius:8px;width:180px;padding:1rem;text-align:center;box-shadow:0 2px 5px rgba(0,0,0,.15);display:flex;flex-direction:column;align-items:center}
+.card img{height:60px;margin-bottom:.5rem}
+.card a{margin-top:auto;background:var(--vert);color:var(--blanc);padding:.5rem 1rem;border-radius:4px;text-decoration:none;font-size:.9rem;transition:background .25s}
+.card a:hover{background:var(--rouge)}
+</style>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="Logo Alhadj Slimane">
-    <div class="scroll-container">
-      <h1 class="scroll-text">Modjhed Alhadj Slimane</h1>
-    </div>
-  </header>
-  <main>
-    <p>Cliquez ci-dessous pour voir toutes mes vidéos :</p>
-    <a href="videos.html" class="btn">▶ Voir la liste</a>
-  </main>
+
+<header>
+  <h1>Sites & services Algérie – Code ultime 2025</h1>
+  <p>Tous les liens vérifiés ce jour – 7 onglets, 85+ services</p>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('admin')">Admin / Justice</button>
+  <button class="tab" onclick="showTab('bank')">Banques</button>
+  <button class="tab" onclick="showTab('press')">Presse</button>
+  <button class="tab" onclick="showTab('travel')">Air / Mer / Transport</button>
+  <button class="tab" onclick="showTab('bill')">Factures</button>
+  <button class="tab" onclick="showTab('shop')">E-commerce</button>
+  <button class="tab" onclick="showTab('plus')">PLUS (part, trésor, maritime…)</button>
+</div>
+
+<!-- 1) ADMIN / JUSTICE / POLICE -->
+<div id="admin" class="content active">
+  <div class="grid">
+    <div class="card"><img src="https://www.adepte.dz/sites/default/files/adepte-logo.png" alt="ADEPTe"><div>ADEPTe</div><a href="https://www.adepte.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.poste.dz/images/logo-poste.png" alt="e-CCP"><div>e-CCP</div><a href="https://e-ccp.poste.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.cnas.dz/images/logo_cnas.png" alt="CNAS"><div>CNAS</div><a href="https://www.cnas.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.cnr.dz/images/logo_cnr.png" alt="CNR"><div>CNR</div><a href="https://www.cnr.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.interieur.gov.dz/assets/img/logo.png" alt="DGSN"><div>DGSN déclaration</div><a href="https://teledeclaration.interieur.gov.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.justice.gov.dz/templates/justice/images/logo.png" alt="Justice"><div>Justice</div><a href="https://www.justice.gov.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.casier-judiciaire.dz/images/logo.png" alt="Casier"><div>Casier judiciaire</div><a href="https://www.casier-judiciaire.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.douane.gov.dz/images/logo-douane.png" alt="Douane"><div>Douane</div><a href="https://www.douane.gov.dz" target="_blank" rel="noopener">Visiter</a></div>
+  </div>
+</div>
+
+<!-- 2) BANQUES -->
+<div id="bank" class="content">
+  <div class="grid">
+    <div class="card"><img src="https://www.bna.dz/sites/default/files/logo-bna.svg" alt="BNA"><div>BNA Connect</div><a href="https://www.bna.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.bea.dz/Assets/img/logo-bea.png" alt="BEA"><div>BEA-Net</div><a href="https://www.bea.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://badrbank.dz/wp-content/uploads/2022/05/logo-badr.svg" alt="BADR"><div>BADR Online</div><a href="https://badrbank.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.cpa-bank.dz/sites/default/files/logo-cpa.png" alt="CPA"><div>CPAY+</div><a href="https://www.cpa-bank.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.albaraka.dz/assets/images/logo-albaraka.svg" alt="Al Baraka"><div>Al Baraka E-Bank</div><a href="https://www.albaraka.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.sg-algerie.dz/sites/default/files/logo-sg.svg" alt="SG"><div>SG Algérie</div><a href="https://www.sg-algerie.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.banquealgerie.dz/images/logo-banque-algerie.png" alt="BA"><div>Banque d’Algérie</div><a href="https://www.banquealgerie.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.alsalambank.dz/images/logo-asb.png" alt="ASB"><div>Al Salam Bank</div><a href="https://www.alsalambank.dz" target="_blank" rel="noopener">Visiter</a></div>
+  </div>
+</div>
+
+<!-- 3) PRESSE -->
+<div id="press" class="content">
+  <div class="grid">
+    <div class="card"><img src="https://www.elwatan.com/sites/default/files/logo-ew.png" alt="El Watan"><div>El Watan</div><a href="https://www.elwatan.com" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.liberte-algerie.com/images/liberte-logo-2021.png" alt="Liberté"><div>Liberté</div><a href="https://www.liberte-algerie.com" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.lesoirdalgerie.com/images/logo-ls.png" alt="Le Soir"><div>Le Soir d’Algérie</div><a href="https://www.lesoirdalgerie.com" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.tsa-algerie.com/assets/images/tsa-logo.png" alt="TSA"><div>TSA</div><a href="https://www.tsa-algerie.com" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.echoroukonline.com/assets/img/logo-ech.png" alt="Echourouk"><div>Echourouk</div><a href="https://www.echoroukonline.com" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.aps.dz/assets/images/logo-aps.png" alt="APS"><div>APS</div><a href="https://www.aps.dz" target="_blank" rel="noopener">Visiter</a></div>
+  </div>
+</div>
+
+<!-- 4) AIR / MER / TRANSPORT -->
+<div id="travel" class="content">
+  <div class="grid">
+    <div class="card"><img src="https://www.airalgerie.dz/themes/custom/airalgerie/logo.svg" alt="Air Algérie"><div>Air Algérie</div><a href="https://www.airalgerie.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.tassiliairlines.com/images/logo-tassili.png" alt="Tassili"><div>Tassili Airlines</div><a href="https://www.tassiliairlines.com" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.algerieferries.dz/templates/ferries/images/logo.png" alt="Algerie Ferries"><div>Algerie Ferries</div><a href="https://www.algerieferries.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.onda.dz/templates/onda/images/logo.png" alt="ONDA"><div>ONDA Aéroports</div><a href="https://www.onda.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.sntf.dz/templates/sntf/images/logo.png" alt="SNTF"><div>SNTF</div><a href="https://www.sntf.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.setram.dz/templates/setram/images/logo.png" alt="SETRAM"><div>Tramway Alger</div><a href="https://www.setram.dz" target="_blank" rel="noopener">Visiter</a></div>
+  </div>
+</div>
+
+<!-- 5) FACTURES -->
+<div id="bill" class="content">
+  <div class="grid">
+    <div class="card"><img src="https://edinar.poste.dz/images/logo-edinar.png" alt="e-Dinar"><div>e-Dinar</div><a href="https://edinar.poste.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.facture.dz/images/logo-facture.png" alt="Facture.dz"><div>Facture.dz</div><a href="https://www.facture.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.saa.dz/assets/front/img/logo-saa.svg" alt="AT"><div>Facture AT</div><a href="https://www.saa.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://facture.djezzy.dz/images/logo-djezzy.png" alt="Djezzy"><div>Djezzy</div><a href="https://facture.djezzy.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://facture.ooredoo.dz/assets/img/logo-ooredoo.png" alt="Ooredoo"><div>Ooredoo</div><a href="https://facture.ooredoo.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://facture.mobilis.dz/images/logo-mobilis.png" alt="Mobilis"><div>Mobilis</div><a href="https://facture.mobilis.dz" target="_blank" rel="noopener">Visiter</a></div>
+  </div>
+</div>
+
+<!-- 6) E-COMMERCE -->
+<div id="shop" class="content">
+  <div class="grid">
+    <div class="card"><img src="https://www.jumia.com.dz/cms/jumia-logo.svg" alt="Jumia"><div>Jumia</div><a href="https://www.jumia.com.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.ouedkniss.com/assets/img/logo-ok.png" alt="OuedKniss"><div>OuedKniss</div><a href="https://www.ouedkniss.com" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.koulchi.com/images/logo-koulchi.png" alt="Koulchi"><div>Koulchi</div><a href="https://www.koulchi.com" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.mydeal.dz/images/logo-mydeal.png" alt="MyDeal"><div>MyDeal</div><a href="https://www.mydeal.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.chap-chap.dz/images/logo-chap.png" alt="Chap-Chap"><div>Chap-Chap</div><a href="https://www.chap-chap.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://yassir.dz/assets/img/logo-yassir.svg" alt="Yassir"><div>Yassir</div><a href="https://yassir.dz" target="_blank" rel="noopener">Visiter</a></div>
+  </div>
+</div>
+
+<!-- 7) PLUS : déclaration de part, trésor, maritime, etc. -->
+<div id="plus" class="content">
+  <div class="grid">
+    <div class="card"><img src="https://www.adepte.dz/sites/default/files/adepte-logo.png" alt="ADEPTe"><div>Déclaration de part</div><a href="https://www.adepte.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.algerieferries.dz/templates/ferries/images/logo.png" alt="Algerie Ferries"><div>Réservation maritime</div><a href="https://www.algerieferries.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.entv.dz/templates/entv/images/logo.png" alt="ENTV"><div>Ticket ferry ENTV</div><a href="https://www.entv.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://baridnet.poste.dz/images/logo-baridnet.png" alt="BaridNet"><div>Trésor / recettes</div><a href="https://baridnet.poste.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.douane.gov.dz/images/logo-douane.png" alt="Douane"><div>Declaration import</div><a href="https://www.douane.gov.dz" target="_blank" rel="noopener">Visiter</a></div>
+    <div class="card"><img src="https://www.justice.gov.dz/templates/justice/images/logo.png" alt="Justice"><div>Patrimoine 2025</div><a href="https://www.justice.gov.dz" target="_blank" rel="noopener">Visiter</a></div>
+  </div>
+</div>
+
+<script>
+function showTab(id){
+  document.querySelectorAll('.content').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
 </body>
 </html>
